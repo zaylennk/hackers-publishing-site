@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hackers Publishing Site</title>
+    <meta
+      name="description"
+      content="A polished one-page submission form for publishing songs to Discord."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Publishing Portal</p>
+          <h1>Share new music with your audience</h1>
+        </div>
+        <button id="openModal" class="primary-btn">Submit a song</button>
+      </header>
+
+      <main class="hero-card">
+        <section class="hero-copy">
+          <p class="eyebrow">Professional submission flow</p>
+          <h2>Send polished song updates directly to Discord</h2>
+          <p>
+            Use the form below to share a song link, a clear description, a title,
+            and the series it belongs to in a clean, professional format.
+          </p>
+          <div class="feature-list">
+            <div class="feature-pill">Clean modal experience</div>
+            <div class="feature-pill">Rich Discord embed</div>
+            <div class="feature-pill">Link sent separately</div>
+          </div>
+        </section>
+
+        <section class="preview-card" aria-label="Preview section">
+          <h3>What gets posted</h3>
+          <p>
+            The submission includes the song description, title, series, and the
+            link in a dedicated Discord message, all attributed to
+            <strong>Xx_IHASHACKER_xX</strong>.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button id="closeModal" class="icon-btn" type="button" aria-label="Close modal">
+          ×
+        </button>
+        <h2 id="modalTitle">Submit a song</h2>
+        <p class="modal-description">
+          Fill in the details below and share your track instantly.
+        </p>
+
+        <form id="submissionForm" novalidate>
+          <label class="field">
+            <span>Song link</span>
+            <input id="songLink" name="songLink" type="url" placeholder="https://..." required />
+          </label>
+
+          <label class="field">
+            <span>Song title</span>
+            <input id="songTitle" name="songTitle" type="text" placeholder="Enter the song title" required />
+          </label>
+
+          <label class="field">
+            <span>Description</span>
+            <textarea id="songDescription" name="songDescription" rows="4" placeholder="Describe the song" required></textarea>
+          </label>
+
+          <label class="field">
+            <span>Series</span>
+            <input id="songSeries" name="songSeries" type="text" placeholder="e.g. The Last Season" required />
+          </label>
+
+          <button type="submit" class="submit-btn">Send to Discord</button>
+        </form>
+
+        <p id="formStatus" class="status-message" role="status"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
