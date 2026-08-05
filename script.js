@@ -5,25 +5,38 @@ const closeModalBtn = document.getElementById("closeModal");
 const form = document.getElementById("submissionForm");
 const statusMessage = document.getElementById("formStatus");
 
-function openModal() {
+function openModal(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
   modalOverlay.hidden = false;
+  modalOverlay.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
   document.getElementById("songLink").focus();
 }
 
-function closeModal() {
+function closeModal(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
   modalOverlay.hidden = true;
+  modalOverlay.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
   form.reset();
   statusMessage.textContent = "";
 }
 
 openModalBtn.addEventListener("click", openModal);
-closeModalBtn.addEventListener("click", closeModal);
+closeModalBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  closeModal(event);
+});
 
 modalOverlay.addEventListener("click", (event) => {
   if (event.target === modalOverlay) {
-    closeModal();
+    closeModal(event);
   }
 });
 
@@ -50,7 +63,7 @@ form.addEventListener("submit", async (event) => {
   statusMessage.textContent = "Sending your submission...";
 
   const payload = {
-    username: "Xx_IHASHACKER_xX",
+    username: "A world of tunes website",
     content: `New song submission link: ${songLink}`,
     embeds: [
       {
@@ -65,7 +78,7 @@ form.addEventListener("submit", async (event) => {
           },
         ],
         footer: {
-          text: "Submitted via the hackers publishing site",
+          text: "Submitted via A world of tunes publishing site",
         },
       },
     ],
