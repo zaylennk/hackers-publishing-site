@@ -32,6 +32,7 @@ function closeModal(event) {
   form.reset();
   statusMessage.textContent = "";
   statusMessage.className = "status-message";
+  statusMessage.hidden = true;
 }
 
 function showStatus(message, isSuccess, closeModalAfter = false) {
@@ -40,13 +41,16 @@ function showStatus(message, isSuccess, closeModalAfter = false) {
     form.reset();
   }
 
+  statusMessage.hidden = false;
   statusMessage.textContent = message;
   statusMessage.className = `status-message ${isSuccess ? "success" : "error"}`;
+  statusMessage.style.opacity = "1";
 
   window.clearTimeout(showStatus.timeoutId);
   showStatus.timeoutId = window.setTimeout(() => {
     statusMessage.textContent = "";
     statusMessage.className = "status-message";
+    statusMessage.hidden = true;
   }, 5000);
 }
 
