@@ -241,10 +241,20 @@ h1 {
 }
 
 .status-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
   min-height: 24px;
-  margin-top: 14px;
-  font-weight: 600;
-  transition: color 180ms ease, opacity 180ms ease;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--text);
+  background: rgba(16, 24, 44, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
 }
 
 .status-message.success {

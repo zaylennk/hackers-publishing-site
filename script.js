@@ -34,7 +34,12 @@ function closeModal(event) {
   statusMessage.className = "status-message";
 }
 
-function showStatus(message, isSuccess) {
+function showStatus(message, isSuccess, closeModalAfter = false) {
+  if (closeModalAfter) {
+    setModalVisibility(false);
+    form.reset();
+  }
+
   statusMessage.textContent = message;
   statusMessage.className = `status-message ${isSuccess ? "success" : "error"}`;
 
@@ -88,7 +93,7 @@ form.addEventListener("submit", async (event) => {
   }
 
   if (!isValidUrl(songLink)) {
-    showStatus("Please enter a valid URL beginning with http:// or https://.", false);
+    showStatus("Please enter a valid URL beginning with http:// or https://and it ends with a valid domain (e.g., .com).", false);
     return;
   }
 
@@ -134,11 +139,9 @@ form.addEventListener("submit", async (event) => {
       throw new Error(`Discord responded with status ${response.status}`);
     }
 
-    showStatus("Posted Successfully", true);
-    form.reset();
-    setTimeout(closeModal, 900);
+    showStatus("Posted Successfully", true, true);
   } catch (error) {
     console.error(error);
-    showStatus("Could not Post", false);
+    showStatus("Could not Post", false, true);
   }
 });
