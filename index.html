@@ -64,23 +64,23 @@
 
         <form id="submissionForm" novalidate>
           <label class="field">
-            <span>Song link</span>
-            <input id="songLink" name="songLink" type="url" placeholder="https://..." required />
+            <span class="field-label">Song link <span class="required-mark" aria-hidden="true">*</span></span>
+            <input id="songLink" name="songLink" type="url" placeholder="https://..." pattern="https?://.+" title="Please enter a valid URL starting with http:// or https://" required />
           </label>
 
           <label class="field">
-            <span>Song title</span>
+            <span class="field-label">Song title <span class="required-mark" aria-hidden="true">*</span></span>
             <input id="songTitle" name="songTitle" type="text" placeholder="Enter the song title" required />
           </label>
 
           <label class="field">
-            <span>Description</span>
+            <span class="field-label">Description <span class="required-mark" aria-hidden="true">*</span></span>
             <textarea id="songDescription" name="songDescription" rows="4" placeholder="Describe the song" required></textarea>
           </label>
 
           <label class="field">
-            <span>Series</span>
-            <input id="songSeries" name="songSeries" type="text" placeholder="e.g. The Last Season" required />
+            <span class="field-label">Series</span>
+            <input id="songSeries" name="songSeries" type="text" placeholder="e.g. The Last Season" />
           </label>
 
           <button type="submit" class="submit-btn">Send to Discord</button>

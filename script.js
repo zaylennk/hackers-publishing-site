@@ -33,6 +33,15 @@ function closeModal(event) {
   statusMessage.textContent = "";
 }
 
+function isValidUrl(value) {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 openModalBtn.addEventListener("click", openModal);
 closeModalBtn.addEventListener("click", (event) => {
   event.stopPropagation();
@@ -60,28 +69,36 @@ form.addEventListener("submit", async (event) => {
   const songDescription = formData.get("songDescription").toString().trim();
   const songSeries = formData.get("songSeries").toString().trim();
 
-  if (!songLink || !songTitle || !songDescription || !songSeries) {
-    statusMessage.textContent = "Please complete every field before sending.";
+  if (!songLink || !songTitle || !songDescription) {
+    statusMessage.textContent = "Please complete the required fields before sending.";
+    return;
+  }
+
+  if (!isValidUrl(songLink)) {
+    statusMessage.textContent = "Please enter a valid URL beginning with http:// or https://.";
     return;
   }
 
   statusMessage.textContent = "Sending your submission...";
 
+  const embedFields = [];
+  if (songSeries) {
+    embedFields.push({
+      name: "Series",
+      value: songSeries,
+      inline: true,
+    });
+  }
+
   const payload = {
     username: "A world of tunes website",
-    content: `@everyone ${songLink}`,
+    content: songLink,
     embeds: [
       {
         title: songTitle,
         description: songDescription,
         color: 0x6d7cff,
-        fields: [
-          {
-            name: "Series",
-            value: songSeries,
-            inline: true,
-          },
-        ],
+        fields: embedFields,
         footer: {
           text: "Submitted via A world of tunes publishing site",
         },

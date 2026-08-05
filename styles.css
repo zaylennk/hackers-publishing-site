@@ -181,8 +181,16 @@ h1 {
   margin-bottom: 14px;
 }
 
-.field span {
+.field .field-label {
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.required-mark {
+  color: #ff5d73;
+  font-weight: 700;
 }
 
 .field input,
