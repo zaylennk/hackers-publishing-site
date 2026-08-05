@@ -93,7 +93,7 @@ form.addEventListener("submit", async (event) => {
   }
 
   if (!isValidUrl(songLink)) {
-    showStatus("Please enter a valid URL beginning with http:// or https://and it ends with a valid domain (e.g., .com).", false);
+    showStatus("Please enter a valid URL beginning with http:// or https:// and it ends with a valid domain (e.g., .com).", false);
     return;
   }
 
