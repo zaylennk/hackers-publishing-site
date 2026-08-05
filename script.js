@@ -5,14 +5,21 @@ const closeModalBtn = document.getElementById("closeModal");
 const form = document.getElementById("submissionForm");
 const statusMessage = document.getElementById("formStatus");
 
+setModalVisibility(false);
+
+function setModalVisibility(isVisible) {
+  modalOverlay.hidden = !isVisible;
+  modalOverlay.style.display = isVisible ? "grid" : "none";
+  modalOverlay.setAttribute("aria-hidden", String(!isVisible));
+  document.body.classList.toggle("modal-open", isVisible);
+}
+
 function openModal(event) {
   if (event) {
     event.preventDefault();
   }
 
-  modalOverlay.hidden = false;
-  modalOverlay.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
+  setModalVisibility(true);
   document.getElementById("songLink").focus();
 }
 
@@ -21,9 +28,7 @@ function closeModal(event) {
     event.preventDefault();
   }
 
-  modalOverlay.hidden = true;
-  modalOverlay.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
+  setModalVisibility(false);
   form.reset();
   statusMessage.textContent = "";
 }
