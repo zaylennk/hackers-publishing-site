@@ -68,6 +68,7 @@ form.addEventListener("submit", async (event) => {
   const songTitle = formData.get("songTitle").toString().trim();
   const songDescription = formData.get("songDescription").toString().trim();
   const songSeries = formData.get("songSeries").toString().trim();
+  const pingEveryone = formData.get("pingEveryone") === "yes";
 
   if (!songLink || !songTitle || !songDescription) {
     statusMessage.textContent = "Please complete the required fields before sending.";
@@ -90,9 +91,11 @@ form.addEventListener("submit", async (event) => {
     });
   }
 
+  const content = pingEveryone ? `@everyone ${songLink}` : songLink;
+
   const payload = {
     username: "A world of tunes website",
-    content: songLink,
+    content,
     embeds: [
       {
         title: songTitle,

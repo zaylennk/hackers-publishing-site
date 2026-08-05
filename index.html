@@ -83,6 +83,20 @@
             <input id="songSeries" name="songSeries" type="text" placeholder="e.g. The Last Season" />
           </label>
 
+          <fieldset class="field">
+            <legend class="field-label">Ping @everyone? <span class="required-mark" aria-hidden="true">*</span></legend>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="pingEveryone" value="yes" />
+                <span>Yes</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="pingEveryone" value="no" checked />
+                <span>No</span>
+              </label>
+            </div>
+          </fieldset>
+
           <button type="submit" class="submit-btn">Send to Discord</button>
         </form>
 
