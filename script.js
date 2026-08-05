@@ -69,7 +69,7 @@ form.addEventListener("submit", async (event) => {
 
   const payload = {
     username: "A world of tunes website",
-    content: `New song submission link: ${songLink}`,
+    content: `@everyone ${songLink}`,
     embeds: [
       {
         title: songTitle,
