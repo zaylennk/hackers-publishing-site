@@ -31,6 +31,18 @@ function closeModal(event) {
   setModalVisibility(false);
   form.reset();
   statusMessage.textContent = "";
+  statusMessage.className = "status-message";
+}
+
+function showStatus(message, isSuccess) {
+  statusMessage.textContent = message;
+  statusMessage.className = `status-message ${isSuccess ? "success" : "error"}`;
+
+  window.clearTimeout(showStatus.timeoutId);
+  showStatus.timeoutId = window.setTimeout(() => {
+    statusMessage.textContent = "";
+    statusMessage.className = "status-message";
+  }, 5000);
 }
 
 function isValidUrl(value) {
@@ -71,16 +83,16 @@ form.addEventListener("submit", async (event) => {
   const pingEveryone = formData.get("pingEveryone") === "yes";
 
   if (!songLink || !songTitle || !songDescription) {
-    statusMessage.textContent = "Please complete the required fields before sending.";
+    showStatus("Please complete the required fields before sending.", false);
     return;
   }
 
   if (!isValidUrl(songLink)) {
-    statusMessage.textContent = "Please enter a valid URL beginning with http:// or https://.";
+    showStatus("Please enter a valid URL beginning with http:// or https://.", false);
     return;
   }
 
-  statusMessage.textContent = "Sending your submission...";
+  showStatus("Sending your submission...", true);
 
   const embedFields = [];
   if (songSeries) {
@@ -122,11 +134,11 @@ form.addEventListener("submit", async (event) => {
       throw new Error(`Discord responded with status ${response.status}`);
     }
 
-    statusMessage.textContent = "Submission sent successfully.";
+    showStatus("Posted Successfully", true);
     form.reset();
     setTimeout(closeModal, 900);
   } catch (error) {
     console.error(error);
-    statusMessage.textContent = `Unable to send the submission. ${error.message}`;
+    showStatus("Could not Post", false);
   }
 });
