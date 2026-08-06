@@ -208,6 +208,11 @@ h1 {
   font: inherit;
 }
 
+.field select {
+  min-height: 48px;
+  appearance: auto;
+}
+
 .radio-group {
   display: flex;
   gap: 16px;
