@@ -1,4 +1,13 @@
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1534691470320205927/WVL1mCehN3shwuOBwfDWr6uGeP1cH0LGy-r4-wgVmuXT21BtUXLhWkpbe1XvPzQlJMVE";
+const SERIES_WEBHOOKS = {
+  "Hypershifted Saga": "https://discord.com/api/webhooks/1535052135425773649/jKEtvw82Yb5J6vvSZEa7nHsFRInBYUPcFqkgioGP0svDed7zrBJNf0k8vC7eu-YdLFOz",
+  "Carnage Saga": "https://discord.com/api/webhooks/1535052313243426816/0X4EXGTnEZnG8jxepikkUAfGd9fuP1z-Nn3gxA_Jb5eQqEJt6SL-uVeqCgBOz2p8ihQA",
+  "Shifted Saga": "https://discord.com/api/webhooks/1535052379907559576/LyDf2yxPXeI_uD275rqLl9AnPUm8ZIrshdxqy5APJ7sqXiOEa5vLe58Em3yi2OZmWkV0",
+  "Anti Shifted Saga": "https://discord.com/api/webhooks/1535052620522328117/THVQSBhh6Y4cCnNCnzoH8r6d_mNyxrer8pjmjbrpVFzpngIAiFJMq3DDbaOnxAmxTylu",
+  "Treatment Troubles": "https://discord.com/api/webhooks/1535052698095853722/PLQDEUu-1ALLW2szA4oGuLSOX-0MLJyRlyGS-GJnAU0-3QW7_ldg1lcJvUPwfPFV5TBR",
+  "Betters and Losses": "https://discord.com/api/webhooks/1535052860717277224/e8BjtNywEyHWIHPlvKSxCdM9cvhSV_XlX88mp6A8m9enUjsOJxY9BUM5GVUTs8qExvdg",
+  "The Acolytes vs the Apocalypse": "https://discord.com/api/webhooks/1535052943638790326/3uu3SaVqrtRIltBVVDrO3z0cxjdnAPFxo7PtnXV7P-4cWUzY86EHQeFgUqNrrz9stFm9",
+  "Rareshifted Saga": "https://discord.com/api/webhooks/1535053401790877746/Mg6wERsL8BNI4tRo1g2tAj-ooAMxR0oRc8GwYKjIY58-BrGFtTyLLuCMhYLYfDoOkK8f",
+};
 const modalOverlay = document.getElementById("modalOverlay");
 const openModalBtn = document.getElementById("openModal");
 const closeModalBtn = document.getElementById("closeModal");
@@ -101,6 +110,11 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 
+  if (!songSeries) {
+    showStatus("Please select a series before sending.", false);
+    return;
+  }
+
   showStatus("Sending your submission...", true);
 
   const embedFields = [];
@@ -113,6 +127,7 @@ form.addEventListener("submit", async (event) => {
   }
 
   const content = pingEveryone ? `@everyone ${songLink}` : songLink;
+  const webhookUrl = SERIES_WEBHOOKS[songSeries];
 
   const payload = {
     username: "A world of tunes website",
@@ -131,7 +146,7 @@ form.addEventListener("submit", async (event) => {
   };
 
   try {
-    const response = await fetch(WEBHOOK_URL, {
+    const response = await fetch(webhookUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

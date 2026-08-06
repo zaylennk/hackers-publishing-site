@@ -197,6 +197,7 @@ h1 {
 }
 
 .field input,
+.field select,
 .field textarea {
   width: 100%;
   padding: 12px 14px;
@@ -230,6 +231,7 @@ h1 {
 }
 
 .field input:focus,
+.field select:focus,
 .field textarea:focus {
   outline: 2px solid rgba(109, 124, 255, 0.34);
   border-color: var(--accent);
