@@ -9,6 +9,44 @@ const SERIES_WEBHOOKS = {
   "Rareshifted Saga": "https://discord.com/api/webhooks/1535053401790877746/Mg6wERsL8BNI4tRo1g2tAj-ooAMxR0oRc8GwYKjIY58-BrGFtTyLLuCMhYLYfDoOkK8f",
 };
 const modalOverlay = document.getElementById("modalOverlay");
+const seriesPicker = document.querySelector(".series-picker");
+const seriesToggle = document.getElementById("seriesSelectToggle");
+const seriesLabel = document.getElementById("seriesSelectLabel");
+const seriesOptions = document.getElementById("seriesOptions");
+const hiddenSeriesSelect = document.getElementById("songSeries");
+
+function resetSeriesPicker() {
+  hiddenSeriesSelect.value = "";
+  seriesLabel.textContent = "Select a series";
+  seriesToggle.setAttribute("aria-expanded", "false");
+  seriesOptions.hidden = true;
+}
+
+function toggleSeriesOptions(isOpen) {
+  const shouldOpen = typeof isOpen === "boolean" ? isOpen : seriesOptions.hidden;
+  seriesOptions.hidden = !shouldOpen;
+  seriesToggle.setAttribute("aria-expanded", String(shouldOpen));
+}
+
+seriesToggle.addEventListener("click", (event) => {
+  event.stopPropagation();
+  toggleSeriesOptions();
+});
+
+seriesOptions.querySelectorAll(".series-option").forEach((optionButton) => {
+  optionButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    hiddenSeriesSelect.value = optionButton.dataset.value;
+    seriesLabel.textContent = optionButton.textContent.trim();
+    toggleSeriesOptions(false);
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (seriesPicker && !seriesPicker.contains(event.target)) {
+    toggleSeriesOptions(false);
+  }
+});
 const openModalBtn = document.getElementById("openModal");
 const closeModalBtn = document.getElementById("closeModal");
 const form = document.getElementById("submissionForm");
@@ -39,6 +77,7 @@ function closeModal(event) {
 
   setModalVisibility(false);
   form.reset();
+  resetSeriesPicker();
   statusMessage.textContent = "";
   statusMessage.className = "status-message";
   statusMessage.hidden = true;
@@ -85,8 +124,12 @@ modalOverlay.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !modalOverlay.hidden) {
-    closeModal();
+  if (event.key === "Escape") {
+    if (!modalOverlay.hidden) {
+      closeModal();
+    } else if (!seriesOptions.hidden) {
+      toggleSeriesOptions(false);
+    }
   }
 });
 
