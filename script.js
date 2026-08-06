@@ -23,7 +23,7 @@ function resetSeriesPicker() {
 }
 
 function toggleSeriesOptions(isOpen) {
-  const shouldOpen = typeof isOpen === "boolean" ? isOpen : seriesOptions.hidden;
+  const shouldOpen = typeof isOpen === "boolean" ? isOpen : false;
   seriesOptions.hidden = !shouldOpen;
   seriesToggle.setAttribute("aria-expanded", String(shouldOpen));
 }
@@ -41,6 +41,8 @@ seriesOptions.querySelectorAll(".series-option").forEach((optionButton) => {
     toggleSeriesOptions(false);
   });
 });
+
+resetSeriesPicker();
 
 document.addEventListener("click", (event) => {
   if (seriesPicker && !seriesPicker.contains(event.target)) {
