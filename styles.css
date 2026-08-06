@@ -208,69 +208,10 @@ h1 {
   font: inherit;
 }
 
-.series-picker {
-  position: relative;
-}
-
-.series-select-toggle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
-  font: inherit;
+.field select {
+  min-height: 48px;
+  appearance: auto;
   cursor: pointer;
-  transition: border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.series-select-toggle:hover,
-.series-select-toggle:focus-visible {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(109, 124, 255, 0.24);
-  outline: none;
-}
-
-.series-select-arrow {
-  color: var(--accent-2);
-  font-size: 1rem;
-}
-
-.series-options {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 6px);
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  max-height: 240px;
-  overflow-y: auto;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(8, 15, 29, 0.98);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
-}
-
-.series-option {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  text-align: left;
-  padding: 10px 12px;
-  font: inherit;
-  cursor: pointer;
-}
-
-.series-option:hover,
-.series-option:focus-visible {
-  background: rgba(109, 124, 255, 0.16);
-  outline: none;
 }
 
 .radio-group {
