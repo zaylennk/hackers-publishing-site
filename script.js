@@ -17,7 +17,7 @@ const hiddenSeriesSelect = document.getElementById("songSeries");
 
 function resetSeriesPicker() {
   hiddenSeriesSelect.value = "";
-  seriesLabel.textContent = "Select a series";
+  seriesLabel.textContent = "Choose a series";
   seriesToggle.setAttribute("aria-expanded", "false");
   seriesOptions.hidden = true;
 }
@@ -30,7 +30,7 @@ function toggleSeriesOptions(isOpen) {
 
 seriesToggle.addEventListener("click", (event) => {
   event.stopPropagation();
-  toggleSeriesOptions();
+  toggleSeriesOptions(true);
 });
 
 seriesOptions.querySelectorAll(".series-option").forEach((optionButton) => {
